@@ -1,11 +1,11 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
+error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
 
 function conectar() {
   $server="localhost";     //127.0.0.1
   $usuario="root";
   $pass="";
-  $bdatos="dw2_personas";
+  $bdatos="dw2_finales1ra";
   $enlace = mysqli_connect($server, $usuario, $pass, $bdatos);
 
   if (!$enlace) {

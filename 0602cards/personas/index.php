@@ -12,7 +12,7 @@ $link=conectar();
    <head>
      <meta charset="utf-8">
      <title>Personas</title>
-     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+     <link rel="stylesheet" href="/dw2_2022/node_modules/bootstrap/dist/css/bootstrap.min.css">
    </head>
    <body>
      <?php
@@ -63,7 +63,7 @@ $link=conectar();
 
       ?>
      </div>
-<script type="text/javascript" src="/node_modules/bootstrap/dist/js/bootstrap.js">
+<script type="text/javascript" src="/dw2_2022/node_modules/bootstrap/dist/js/bootstrap.js">
 
 </script>
    </body>

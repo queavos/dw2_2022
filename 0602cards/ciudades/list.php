@@ -1,24 +1,10 @@
 <?php
 $res=mostrarCiudades($link);
  ?>
- <h3>ciudades</h3>
- <table>
-   <thead>
-     <tr>
-       <th>Id</th>
-       <th>Ciudad</th>
-       <th colspan="2"><a href="index.php?mod=new">Nuevo</a></th>
-     </tr>
-   </thead>
-   <tbody>
-
+ <h3>Ciudades</h3><a href="index.php?mod=new" class="btn btn-success">Nuevo</a><a href="json.php" target="new" class="btn btn-primary">JSON</a>
      <?php
      while ($data=mysqli_fetch_array($res))
      {
-       echo "<tr><td>".$data[0]."</td><td>".$data['ciudad']."</td><td><a href='index.php?mod=edit&id=".$data["id"]."'>editar</a></td><td><a href='index.php?mod=delete&id=".$data["id"]."'>borrar</a></td></tr>";
+       include 'card.vw.php';
      }
       ?>
-   <tbody>
-
-   </tbody>
- </table>
