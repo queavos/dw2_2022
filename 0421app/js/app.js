@@ -19,8 +19,11 @@ console.log("cargando datos...");
 url=rutaJSON+"personas/json.php";
 $.getJSON(url, function(data, status){
   localStorage.setItem('personas',JSON.stringify(data));
+  personas=JSON.parse(localStorage.getItem('personas'));
+  limpiarTabla();
+  cargarTabla();
 });
-personas=JSON.parse(localStorage.getItem('personas'));
+
 if (personas==null)
 {
   personas=[];
@@ -44,7 +47,7 @@ function cargarTabla()
     salida="";
     for (var i = 0; i < personas.length; i++) {
         console.log("girando");
-        salida=salida+"<tr><td>"+i+"</td><td>"+personas[i].cin+"</td><td>"+personas[i].apellido+"</td><td>"+personas[i].nombre+"</td><td>"+personas[i].fenac+"</td> <td><a class='btEditar btn btn-outline-warning ' data-idx='"+personas[i].id+"'>Editar</a></td> <td><a class='btBorrar btn btn-outline-danger ' data-idx='"+personas[i].id+"'>Borrar</a></td></tr>"
+        salida=salida+"<tr><td>"+personas[i].id+"</td><td>"+personas[i].cin+"</td><td>"+personas[i].apellido+"</td><td>"+personas[i].nombre+"</td><td>"+personas[i].fenac+"</td> <td><a class='btEditar btn btn-outline-warning ' data-idx='"+i+"'>Editar</a></td> <td><a class='btBorrar btn btn-outline-danger ' data-idx='"+i+"'>Borrar</a></td></tr>"
         //console.log(salida);
       }
       document.getElementById('tab_datos').innerHTML=salida;
@@ -66,18 +69,20 @@ function cargarTabla()
   }
   function borrarRegistro(e)
   {
-    
+    console.log(e.target);
     let idxe=e.target.attributes["data-idx"].value;
     /*
     personas.splice(idxe,1);
     persistirRegistros();
 */
-url=rutaJSON+"personas/api.php?mod=delete&id="+idxe;
+let id=personas[idxe].id;
+url=rutaJSON+"personas/api.php?mod=delete&id="+id;
   $.get(url,function(data, status){
   //alert("Data: " + data + "\nStatus: " + status);
+  limpiarForm();
+  limpiarTabla();
+  iniciarApp()
   });
-    limpiarTabla();
-    cargarTabla();
   }
 ///
 function limpiarForm()
@@ -92,10 +97,10 @@ function limpiarForm()
 //editarForm
 function editarForm(e)
 {
-  //console.log(e);
+  console.log(e.target);
   let idxe=e.target.attributes["data-idx"].value;
   //console.log(idxe);
-  document.getElementById('idx').value=idxe;
+  document.getElementById('idx').value=personas[idxe].id;
   document.getElementById('cin').value=personas[idxe].cin;
   document.getElementById('apellido').value=personas[idxe].apellido;
   document.getElementById('nombre').value=personas[idxe].nombre;
@@ -121,9 +126,9 @@ function procesarForm()
       // }
     let p={
         "id":document.getElementById('idx').value,
-        "nombre": document.getElementById('nombre').value, 
-        "apellido":document.getElementById('apellido').value, 
-        "cin":document.getElementById('cin').value, 
+        "nombre": document.getElementById('nombre').value,
+        "apellido":document.getElementById('apellido').value,
+        "cin":document.getElementById('cin').value,
         "fenac":document.getElementById('fenac').value }
 console.log(personas);
     personas.push(p);
@@ -138,9 +143,9 @@ console.log(personas);
     */
     let p={
       "id":document.getElementById('idx').value,
-      "nombre": document.getElementById('nombre').value, 
-      "apellido":document.getElementById('apellido').value, 
-      "cin":document.getElementById('cin').value, 
+      "nombre": document.getElementById('nombre').value,
+      "apellido":document.getElementById('apellido').value,
+      "cin":document.getElementById('cin').value,
       "fenac":document.getElementById('fenac').value }
     //
     console.log(p);
@@ -148,12 +153,13 @@ console.log(personas);
     $.post(url,p,
     function(data, status){
       //alert("Data: " + data + "\nStatus: " + status);
+      limpiarForm();
+      limpiarTabla();
+      iniciarApp()
     });
 
-    //  
-    limpiarForm();
-    limpiarTabla();
-    iniciarApp()
+    //
+
 
 }
 function persistirRegistros()

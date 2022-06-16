@@ -5,7 +5,7 @@ function conectar() {
   $server="localhost";     //127.0.0.1
   $usuario="root";
   $pass="";
-  $bdatos="dw2_finales1ra";
+  $bdatos="dw2_personas";
   $enlace = mysqli_connect($server, $usuario, $pass, $bdatos);
 
   if (!$enlace) {
