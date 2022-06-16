@@ -1,0 +1,63 @@
+rutaJSON="http://127.0.0.1/dw2_2022/0602cards/";
+ciudades=[];
+function getCiudades(){
+    console.log("cargando datos...");
+    url=rutaJSON+"ciudades/json.php";
+    $.getJSON(url, function(data, status){
+      localStorage.setItem('ciudades',JSON.stringify(data));
+    });
+    ciudades=JSON.parse(localStorage.getItem('ciudades'));
+    if (ciudades==null)
+    {
+        ciudades=[];
+    }  
+}
+function getCiudadById(cid)
+    {
+        for (var i = 0; i < ciudades.length; i++) {
+            if (ciudades[i].id==cid) 
+                {
+                    return i;
+                }
+        } 
+        return -1;
+    } 
+function saveCiudades(){
+    let p={
+        "id":document.getElementById('idx').value,
+        "ciudad": document.getElementById('ciudad').value
+        }
+      //
+      console.log("save ciudades");
+      url=rutaJSON+"ciudades/api.php";
+     console.log(url);
+      $.post(url,p,
+      function(data, status){
+        iniciarCiudades();
+      });
+      iniciarCiudades();
+}
+function newCiudades(){}
+function editCiudades(){}
+function deleteCiudades(e)
+    {
+    console.log("borrar ciudades...");    
+    let idxe=e.target.attributes["data-id"].value;
+    url=rutaJSON+"ciudades/api.php?mod=delete&id="+idxe;
+    console.log(url);
+    $.get(url,function(data, status){
+    //alert("Data: " + data + "\nStatus: " + status);
+    iniciarCiudades()
+  });
+  iniciarCiudades()
+  }
+
+
+
+
+function iniciarCiudades()
+{
+  getCiudades();
+  mostrarCiudades();
+}
+window.onload=iniciarCiudades;
