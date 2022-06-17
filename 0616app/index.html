@@ -9,33 +9,24 @@
   </head>
   <body >
 <h1>Bienvenidos</h1>
-<p> <a class=" btn " id="btLimpiar">Limpiar</a> </p>
-<p> <a class=" btn " id="btCargar">Cargar</a> </p>
-<p>  </p>
-<table  class="table table-striped">
-  <thead>
+<nav class="navbar navbar-light bg-light">
+  <p class="form-inline">
+    <a class="btn btn-outline-success" id="ciudadesList" >Ciudades</a>
+    <a class="btn btn-outline-success" id="personasList">Personas</a>
+  </p>
+</nav>
+<!-- formulario de personas -->
+<div class="container" id="datosPersonas">
+  <a id='btNuevo'class='btn btn-success ' >Nuevo</a>
+</div>
 
+<!-- formulario de personas -->
 
-  <tr id="tab_cabe">
-    <th>Id</th>
-    <th>Nro. Documento</th>
-    <th>Apellido</th>
-    <th>Nombre</th>
-    <th>F. Nacimiento</th>
-    <th><a class=" btn  btn-outline-success " id="btNuevo" colspan="2">Nuevo</a></th>
-      </tr>
-  </thead>
-  <tbody id="tab_datos">
-  <tr>
-    <td>id</td><td>nrodoc</td><td>Apellido</td><td>Nombre</td><td>fenac</td>
-  </tr>
-  </tbody>
-</table>
-<div id="form">
+<div id="formPersonas">
   <form class="container">
   <!-- Name input -->
   <div class="form-outline mb-4">
-    <input type="hidden" id="idx" class="form-control" />
+    <input type="hidden" id="id" class="form-control" />
     <input type="text" id="cin" class="form-control" />
     <label class="form-label" for="form4Example1">Nro de documento</label>
   </div>
@@ -63,7 +54,29 @@
 </form>
 
 </div>
+<!-- formulario de ciudades -->
+
+<div class="container">
+    <div id="datosCiudades">
+    </div>
+
+<!-- datos de ciudades -->
+<div id="formCiudades">
+<h3>Ciudad</h3>
+<form class="" action="index.php" method="post">
+        <input id="idx" type="hidden" name="idx" value="">  <br>
+        <label for="ciudad">Ciudad</label><br>
+        <input id="ciudad" type="text" class="form-control"  name="ciudad" value=""><br>
+        <button type="button"  class="btn btn-primary" id="sendFormCiudad" >Enviar</button><a  class="btn btn-secondary" id="cancelFormCiudad" >volver</a>
+</form>
+</div>
+
 <script  src="../node_modules/jquery/dist/jquery.js" ></script>
 <script src="js/app.js" ></script>
+<script src="js/ciudades.app.js" ></script>
+<script src="js/ciudades.ui.js"></script>
+<script src="js/personas.app.js" ></script>
+<script src="js/personas.ui.js"></script>
+
   </body>
 </html>
